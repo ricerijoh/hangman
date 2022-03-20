@@ -1,11 +1,11 @@
 import re
-import numpy as np
 import pandas as pd
+from numpy.random import randint
 
 class Hangman():
     def __init__(self):
         self.json = pd.read_json("data/word.json")
-        self.rnd = np.random.randint(low = 0, high = 99)
+        self.rnd = randint(low = 0, high = 99)
         self.word = pd.DataFrame()
         self.count = 0
         self.guessed = []
@@ -49,12 +49,12 @@ class Hangman():
 
     def check_count(self):
         if self.count == 5:
-            print("YOU LOST! the word was: ", self.word)
+            print("YOU LOST! (o_o)\nThe word was: ", self.word)
 
 print("\n")
 print("This is Hang-man!")
 print("You are supposed to guess the letter in the word")
-print("if you can't make it will the man hang! :)\n")
+print("if you can't make it the man hang! :)\n")
 hangman = Hangman()
 hangman.get_rnd_word()
 hangman.hidden_word()
