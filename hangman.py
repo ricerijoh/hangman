@@ -8,6 +8,7 @@ class Hangman():
         self.rnd = np.random.randint(low = 0, high = 99)
         self.word = pd.DataFrame()
         self.count = 0
+        self.guessed = []
 
     def get_rnd_word(self):
         self.word = self.json["word"].iloc[self.rnd]
@@ -45,6 +46,7 @@ class Hangman():
     def check_word(self):
         if "".join(self.hidden_word) == self.word:
             print("YOU WON!")
+
     def check_count(self):
         if self.count == 5:
             print("YOU LOST! the word was: ", self.word)
@@ -60,5 +62,10 @@ hangman.print_hidden_word()
 
 while hangman.count < 5 and "".join(hangman.hidden_word) != hangman.word:
     inp = input()
-    hangman.update_hidden_word(inp)
-    print("\n")
+
+    if inp not in hangman.guessed:
+        hangman.update_hidden_word(inp)
+        hangman.guessed.append(inp)
+        print("\n")
+    elif inp in hangman.guessed:
+        print(f"You have already guessed {inp}")
